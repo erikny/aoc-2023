@@ -32,6 +32,24 @@ trait Inputs {
     }
   }
 
+  def toIntArray(input: String, separator: Char = ' '): Array[Int] = {
+    splitLine(input)
+      .filterNot(_.isEmpty)
+      .map(_.toInt)
+  }
+
+  def toLongArray(input: String, separator: Char = ' '): Array[Long] = {
+      splitLine(input)
+        .filterNot(_.isEmpty)
+        .map(_.toLong)
+  }
+
+  def splitLine(input: String, separator: Char = ' ', trim: Boolean = true): Array[String] = {
+    input.trim
+      .split(separator)
+      .map(_.trim)
+  }
+
   def groups[B](strings: Seq[B], predicate: B=>Boolean): Seq[Seq[B]] = {
     val reduction = strings.foldLeft((Seq():Seq[Seq[B]], Seq[B]())) {
       case ((reduction, remainder), item) =>
