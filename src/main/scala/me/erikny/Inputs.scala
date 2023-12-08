@@ -7,6 +7,7 @@ trait Inputs {
   val testFileName = s"${this.getClass.getTypeName.toLowerCase.replace("$", "").split("\\.").last}test.txt"
 
 
+  def getThisInput(fileName: String) = read(fileName)
   def getInput: Seq[String] = read(fileName)
   def getRaw: String = raw(fileName)
   def getTestInput: Seq[String] = read(testFileName)
