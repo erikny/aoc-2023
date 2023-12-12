@@ -34,13 +34,13 @@ trait Inputs {
   }
 
   def toIntArray(input: String, separator: Char = ' '): Array[Int] = {
-    splitLine(input)
+    splitLine(input, separator)
       .filterNot(_.isEmpty)
       .map(_.toInt)
   }
 
   def toLongArray(input: String, separator: Char = ' '): Array[Long] = {
-      splitLine(input)
+      splitLine(input, separator)
         .filterNot(_.isEmpty)
         .map(_.toLong)
   }

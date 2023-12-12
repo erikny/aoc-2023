@@ -12,7 +12,6 @@ class Day$1 extends Inputs {
   }
 }
 EOF
-mkdir -p src/test/scala/dev/gabrielsson
 mkdir -p src/test/resources
 cat << EOF > src/test/scala/me/erikny/Day$1Suite.scala
 package me.erikny
