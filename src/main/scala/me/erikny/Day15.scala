@@ -1,6 +1,5 @@
 package me.erikny
 
-import java.util
 import scala.collection.immutable.ListMap
 
 class Day15 extends Inputs {

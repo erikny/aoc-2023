@@ -61,4 +61,22 @@ trait Inputs {
     }
     reduction._1 :+ reduction._2
   }
+
+  case class MapGrid[A](data: Map[(Long, Long), A]){
+    val rows: Long = data.keys.map(_._1).max
+    val columns: Long = data.keys.map(_._2).max
+    def apply(position: (Long, Long)): A = data(position)
+  }
+
+  def readGrid(lines: Seq[String]): MapGrid[Char] = {
+    MapGrid(lines.zipWithIndex.flatMap {
+      case (line, row) => line.zipWithIndex.map {
+        case (char, column) => ((row.toLong, column.toLong), char)
+      }
+    }.toMap)
+  }
+  def readGridNumeric(lines: Seq[String]): MapGrid[Int] = {
+    MapGrid(readGrid(lines).data.map(t => (t._1, t._2.asDigit)))
+  }
+
 }
