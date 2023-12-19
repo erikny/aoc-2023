@@ -17,6 +17,13 @@ object TupleHelpers {
 
   implicit class TupleDirection(val t: (Long, Long)) extends AnyVal {
     def move(direction: (Long, Long)): (Long, Long) = t + direction
+    def moveDistance(direction: (Long, Long), distance: Long): (Long, Long) =
+      t + (direction * (distance, distance))
+    def makeTrail(direction: (Long, Long), steps: Long) = {
+      val trail = Seq(t)
+      (0L to steps).foldLeft(trail)((acc, step) => acc.head.move(direction) +: acc)
+    }
+
     def reverse: (Long, Long) = (t._1 * -1, t._2 * -1)
   }
   

@@ -35,4 +35,11 @@ object Graph {
     }
     (Map.empty, 0L)
   }
+
+//  def insideOfTrail(trail: Set[(Long, Long)]: Set[(Long, Long)] = {
+//    val xmin = trail.map(_._1).min + 1
+//    val xmax = trail.map(_._1).max - 1
+//    val ymin = trail.map(_._2).min -
+//    val ymax = trail.map(_._2).max
+//  }
 }
