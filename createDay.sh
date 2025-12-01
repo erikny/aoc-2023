@@ -1,5 +1,7 @@
-cat << EOF > aoc2024/src/main/scala/me/erikny/aoc2024/Day$1.scala
-package me.erikny.aoc2024
+YEAR=2025
+
+cat << EOF > aoc$YEAR/src/main/scala/me/erikny/aoc$YEAR/Day$1.scala
+package me.erikny.aoc$YEAR
 
 import me.erikny.aoc.common.Inputs
 
@@ -15,8 +17,8 @@ class Day$1 extends Inputs {
 }
 EOF
 mkdir -p src/test/resources
-cat << EOF > aoc2024/src/test/scala/me/erikny/aoc2024/Day$1Suite.scala
-package me.erikny.aoc2024
+cat << EOF > aoc$YEAR/src/test/scala/me/erikny/aoc$YEAR/Day$1Suite.scala
+package me.erikny.aoc$YEAR
 
 import org.junit.runner.RunWith
 import org.scalatest.flatspec.AnyFlatSpec
@@ -42,5 +44,5 @@ class Day$1Suite extends AnyFlatSpec with Matchers {
 }
 EOF
 
-curl "https://adventofcode.com/2024/day/$1/input" -H "cookie: session=$AOC_SESSION_ID" -o aoc2024/src/test/resources/day$1.txt
-touch aoc2024/src/test/resources/day$1test.txt
+curl "https://adventofcode.com/$YEAR/day/$1/input" -H "cookie: session=$AOC_SESSION_ID" -o aoc$YEAR/src/test/resources/day$1.txt
+touch aoc$YEAR/src/test/resources/day$1test.txt

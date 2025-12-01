@@ -11,4 +11,5 @@ rootProject.name = 'adventofcode'
 include 'aoc-common'
 include 'aoc2023'
 include 'aoc2024'
+include 'aoc2025'
 
