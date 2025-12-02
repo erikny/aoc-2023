@@ -31,43 +31,50 @@ class Day1 extends Inputs {
   }
 
   def part2(input: Seq[String]): Int = {
-    val allsteps = input.foldLeft(Seq(Move(0, R, 0, 0, 50)))((acc, s) => {
-      val value = s.substring(1).toInt
-      val loops = value / 100
-      val steps = value % 100
-      val previousPos = acc.head.to
-      s.charAt(0) match {
+    input.foldLeft((0, 50))((acc, s) => {
+      val (breaches, previousPos) = acc
+      val char = s.charAt(0)
+      val totalSteps = s.substring(1).toInt
+      val loops = totalSteps / 100
+      val actualSteps = totalSteps % 100
+      val newPos = char match {
         case 'L' =>
-          val nextPos = previousPos - steps
-          Move(previousPos, L, loops, steps, if (nextPos < 0) (100 - Math.abs(nextPos)) else nextPos) +: acc
-        case 'R' => R
-          val nextPos = (previousPos + value) % 100
-          Move(previousPos, R, loops, steps, nextPos) +: acc
+          val next = previousPos - actualSteps
+          if(next < 0) (100 - Math.abs(next)) else next
+        case 'R' =>
+          (previousPos + actualSteps) % 100
       }
-    }).init.reverse
-    allsteps.foreach{
-      step => println(s"${step.direction}${step.loops * 100 + step.steps}: from=${step.from} to=${step.to} breaches=${step.breaches}")
-    }
-    allsteps.map(_.breaches).sum
-//    val ints = input.foldLeft(Seq((0, 50)))((acc, s) => {
-//      val char = s.charAt(0)
+      val thisBreach = (newPos, char) match {
+        case (0, _) => loops + 1
+        case (newPos, 'L') if (previousPos > 0) && (newPos > previousPos) =>
+          loops + 1
+        case (newPos, 'R') if (newPos < previousPos) =>
+          loops + 1
+        case _ => loops
+      }
+      println(s"${s}: from=${previousPos} to=$newPos breaches=${thisBreach}")
+      (breaches + thisBreach, newPos)
+    })._1
+
+//
+//
+//    val allsteps = input.foldLeft(Seq(Move(0, R, 0, 0, 50)))((acc, s) => {
 //      val value = s.substring(1).toInt
-//      val hundreds = value / 100
-//      char match {
+//      val loops = value / 100
+//      val steps = value % 100
+//      val previousPos = acc.head.to
+//      s.charAt(0) match {
 //        case 'L' =>
-//          val next = acc.head._2 - value
-//          val breaches = hundreds + (if (next < 0 ) 1 else 0)
-//          val nextTick = if(next < 0) (100 - Math.abs(next)) else next
-//          println(s"$char$value => start=${acc.head._2} next=$next breaches=$breaches nextTick=$nextTick")
-//          (breaches, nextTick) +: acc
-//        case 'R' =>
-//          val next = acc.head._2 + value
-//          val breaches = hundreds + (if (next > 99 ) 1 else 0)
-//          val nextTick = (next % 100)
-//          println(s"$char$value => start=${acc.head._2} next=$next breaches=$breaches nextTick=$nextTick")
-//          (breaches, nextTick) +: acc
+//          val nextPos = previousPos - steps
+//          Move(previousPos, L, loops, steps, if (nextPos < 0) (100 - Math.abs(nextPos)) else nextPos) +: acc
+//        case 'R' => R
+//          val nextPos = (previousPos + value) % 100
+//          Move(previousPos, R, loops, steps, nextPos) +: acc
 //      }
-//    })
-//    ints.map(p => p._1).sum
+//    }).init.reverse
+//    allsteps.foreach{
+//      step => println(s"${step.direction}${step.loops * 100 + step.steps}: from=${step.from} to=${step.to} breaches=${step.breaches}")
+//    }
+//    allsteps.map(_.breaches).sum
   }
 }
