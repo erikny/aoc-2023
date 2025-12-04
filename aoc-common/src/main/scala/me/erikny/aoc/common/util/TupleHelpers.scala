@@ -6,6 +6,10 @@ object TupleHelpers {
   val South: (Long, Long) = (1L, 0L)
   val East: (Long, Long) = (0L, 1L)
   val West: (Long, Long) = (0L, -1L)
+  val NorthEast: (Long, Long) = (-1L, -1L)
+  val NorthWest: (Long, Long) = (-1L, 1L)
+  val SouthEast: (Long, Long) = (1L, -1L)
+  val SouthWest: (Long, Long) = (1L, 1L)
   val CompassNavigation: Set[(Long, Long)] = Set(North, West, South, East)
 
   implicit class LongTupleFeatures(val t: (Long, Long)) extends AnyVal {
